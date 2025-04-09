@@ -3,8 +3,8 @@
 
 class Entity {
 protected:
-    std::string name; // Защищенное поле: имя
-    int health;       // Защищенное поле: здоровье
+    std::string name;
+    int health;
 
 public:
     // Конструктор базового класса
@@ -21,7 +21,7 @@ public:
 
 class Player : public Entity {
 private:
-    int experience; // Приватное поле: опыт
+    int experience;
 
 public:
     // Конструктор производного класса
@@ -31,14 +31,14 @@ public:
 
     // Переопределение метода displayInfo
     void displayInfo() const override {
-        Entity::displayInfo(); // Вызов метода базового класса
+        Entity::displayInfo();
         std::cout << "Experience: " << experience << std::endl;
     }
 };
 
 class Enemy : public Entity {
 private:
-    std::string type; // Приватное поле: тип врага
+    std::string type;
 
 public:
     // Конструктор производного класса
@@ -48,7 +48,7 @@ public:
 
     // Переопределение метода displayInfo
     void displayInfo() const override {
-        Entity::displayInfo(); // Вызов метода базового класса
+        Entity::displayInfo();
         std::cout << "Type: " << type << std::endl;
     }
 };
@@ -56,7 +56,7 @@ public:
 // Задание 1: Создание класса Boss, наследующего от Enemy
 class Boss : public Enemy {
 private:
-    std::string specialAbility; // Приватное поле: особая способность
+    std::string specialAbility;
 
 public:
     // Конструктор класса Boss
@@ -66,7 +66,7 @@ public:
 
     // Задание 2: Переопределение метода displayInfo
     void displayInfo() const override {
-        Enemy::displayInfo(); // Вызов метода базового класса Enemy
+        Enemy::displayInfo();
         std::cout << "Special Ability: " << specialAbility << std::endl;
     }
 };

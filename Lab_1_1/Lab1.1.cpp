@@ -3,10 +3,10 @@
 
 class Character {
 private:
-    std::string name; // Приватное поле: имя персонажа
-    int health;       // Приватное поле: уровень здоровья
-    int attack;       // Приватное поле: уровень атаки
-    int defense;      // Приватное поле: уровень защиты
+    std::string name;
+    int health;
+    int attack;
+    int defense;
 
 public:
     // Конструктор для инициализации данных
@@ -26,7 +26,7 @@ public:
     }
 
     // Метод для атаки другого персонажа
-    void attackEnemy(Character& enemy) { // Исправлено: передача по ссылке
+    void attackEnemy(Character& enemy) {
         int damage = attack - enemy.defense;
         if (damage > 0) {
             enemy.health -= damage;
@@ -40,14 +40,14 @@ public:
     // Задание 1: Метод для лечения персонажа
     void heal(int amount) {
         health += amount;
-        if (health > 100) health = 100; // Максимальное здоровье ограничено 100
+        if (health > 100) health = 100;
         std::cout << name << " heals for " << amount << " HP!" << std::endl;
     }
 
     // Задание 2: Метод для получения урона
     void takeDamage(int amount) {
         health -= amount;
-        if (health < 0) health = 0; // Здоровье не опускается ниже 0
+        if (health < 0) health = 0;
         std::cout << name << " takes " << amount << " damage!" << std::endl;
     }
 };

@@ -1,13 +1,13 @@
 #include <iostream>
 #include <string>
-#include <memory> // Для std::unique_ptr
+#include <memory>
 
 // Класс Weapon
 class Weapon {
 private:
-    std::string name;  // Название оружия
-    int damage;        // Урон
-    int weight;        // Вес
+    std::string name;
+    int damage;
+    int weight;
 
 public:
     // Конструктор
@@ -41,9 +41,9 @@ class Character {
 private:
     std::string name;
     int health;
-    int baseAttack; // Базовая атака без учёта оружия
+    int baseAttack;
     int defense;
-    std::unique_ptr<Weapon> equippedWeapon; // Экипированное оружие
+    std::unique_ptr<Weapon> equippedWeapon;
 
 public:
     // Конструктор
@@ -64,16 +64,16 @@ public:
             unequipWeapon();
         }
         equippedWeapon = std::move(weapon);
-        baseAttack += equippedWeapon->getDamage(); // Увеличиваем атаку
+        baseAttack += equippedWeapon->getDamage();
         std::cout << name << " equipped " << equippedWeapon->getName() << ".\n";
     }
 
     // Метод для снятия оружия
     void unequipWeapon() {
         if (equippedWeapon) {
-            baseAttack -= equippedWeapon->getDamage(); // Уменьшаем атаку
+            baseAttack -= equippedWeapon->getDamage();
             std::cout << name << " unequipped " << equippedWeapon->getName() << ".\n";
-            equippedWeapon.reset(); // Освобождаем память
+            equippedWeapon.reset();
         }
         else {
             std::cout << name << " has no weapon to unequip.\n";

@@ -7,7 +7,7 @@ class Entity {
 protected:
     std::string name;
     int health;
-    int attackPower; // Поле переименовано с attack на attackPower
+    int attackPower;
     int defense;
 
 public:
@@ -143,7 +143,7 @@ public:
 };
 
 int main() {
-    srand(static_cast<unsigned>(time(0))); // Инициализация генератора случайных чисел
+    srand(static_cast<unsigned>(time(0)));
 
     // Создание объектов
     Character hero("Hero", 100, 20, 10);
