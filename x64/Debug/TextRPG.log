@@ -1,2 +1,12 @@
-﻿  Lab4.cpp
+﻿  Lab10.cpp
+C:\Users\fuheshka\source\repos\TextRPG\TextRPG\Lab_10_0\Lab10.cpp(303,18): warning C4101: comma: неиспользованная локальная переменная
+      C:\Users\fuheshka\source\repos\TextRPG\TextRPG\Lab_10_0\Lab10.cpp(303,18):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Users\fuheshka\source\repos\TextRPG\TextRPG\Lab_10_0\Lab10.cpp(346,79):
+          выполняется компиляция ссылки на экземпляр класс шаблон функции "AccessControlSystem<std::unique_ptr<User,std::default_delete<User>>,std::unique_ptr<Resource,std::default_delete<Resource>>>"
+          C:\Users\fuheshka\source\repos\TextRPG\TextRPG\Lab_10_0\Lab10.cpp(251,10):
+          во время компиляции функции-члена класс шаблон "void AccessControlSystem<std::unique_ptr<User,std::default_delete<User>>,std::unique_ptr<Resource,std::default_delete<Resource>>>::loadFromFile(const std::string &)"
+              C:\Users\fuheshka\source\repos\TextRPG\TextRPG\Lab_10_0\Lab10.cpp(395,31):
+              см. первую ссылку на AccessControlSystem<std::unique_ptr<User,std::default_delete<User>>,std::unique_ptr<Resource,std::default_delete<Resource>>>::loadFromFile "main"
+  
   TextRPG.vcxproj -> C:\Users\fuheshka\source\repos\TextRPG\x64\Debug\TextRPG.exe

@@ -1,8 +1,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stdexcept>
 
-// Базовый класс Entity
+// Базовый класс
 class Entity {
 protected:
     std::string name;
@@ -15,10 +16,14 @@ public:
         std::cout << "Name: " << name << ", HP: " << health << std::endl;
     }
 
+    int getHealth() const {
+        return health;
+    }
+
     virtual ~Entity() {}
 };
 
-// Класс Player
+// Игрок
 class Player : public Entity {
 private:
     int experience;
@@ -34,7 +39,7 @@ public:
     }
 };
 
-// Класс Enemy
+// Враг
 class Enemy : public Entity {
 private:
     std::string type;
@@ -50,7 +55,7 @@ public:
     }
 };
 
-// Шаблонный класс GameManager
+// Шаблонный класс GameManager с обработкой исключений
 template <typename T>
 class GameManager {
 private:
@@ -58,6 +63,9 @@ private:
 
 public:
     void addEntity(const T& entity) {
+        if (entity->getHealth() <= 0) {
+            throw std::invalid_argument("Entity has invalid health (<= 0)");
+        }
         entities.push_back(entity);
     }
 
@@ -68,29 +76,24 @@ public:
     }
 };
 
-// Шаблонный класс Queue
+// Шаблонный класс Queue с исключениями
 template <typename T>
 class Queue {
 private:
     std::vector<T> items;
 
 public:
-    // Добавление элемента в очередь
     void push(const T& item) {
         items.push_back(item);
     }
 
-    // Удаление первого элемента из очереди
     void pop() {
-        if (!items.empty()) {
-            items.erase(items.begin());
+        if (items.empty()) {
+            throw std::out_of_range("Queue is empty — cannot pop.");
         }
-        else {
-            std::cout << "Queue is empty. Nothing to pop.\n";
-        }
+        items.erase(items.begin());
     }
 
-    // Вывод содержимого очереди
     void display() const {
         std::cout << "Queue contents:\n";
         for (const auto& item : items) {
@@ -101,31 +104,34 @@ public:
 
 // Функция main
 int main() {
-    // Работа с GameManager
+    // Работа с GameManager + try-catch
     GameManager<Entity*> manager;
-    manager.addEntity(new Player("Hero", 100, 0));
-    manager.addEntity(new Enemy("Goblin", 50, "Goblin"));
 
-    std::cout << "GameManager Entities:\n";
+    try {
+        manager.addEntity(new Player("Hero", 100, 0)); // OK
+        manager.addEntity(new Enemy("Zombie", -10, "Undead")); // Ошибка
+    }
+    catch (const std::invalid_argument& e) {
+        std::cerr << "Error adding entity: " << e.what() << std::endl;
+    }
+
     manager.displayAll();
 
-    // Работа с Queue (строки)
-    Queue<std::string> stringQueue;
-    stringQueue.push("Sword");
-    stringQueue.push("Potion");
-    stringQueue.push("Shield");
-    stringQueue.display();
-    stringQueue.pop();
-    stringQueue.display();
+    // Работа с очередью и исключением
+    Queue<std::string> queue;
+    queue.push("Potion");
+    queue.push("Elixir");
 
-    // Работа с Queue (числа)
-    Queue<int> intQueue;
-    intQueue.push(10);
-    intQueue.push(20);
-    intQueue.push(30);
-    intQueue.display();
-    intQueue.pop();
-    intQueue.display();
+    queue.display();
+    queue.pop(); // OK
+    queue.pop(); // OK
+
+    try {
+        queue.pop(); // Ошибка — очередь пуста
+    }
+    catch (const std::out_of_range& e) {
+        std::cerr << "Queue error: " << e.what() << std::endl;
+    }
 
     return 0;
 }

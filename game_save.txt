@@ -1,0 +1,5 @@
+Hero,100,20,10,1,0,2 Potion Bow
+3
+Goblin,Goblin1,0,15,5
+Dragon,Dragon1,200,30,20
+Skeleton,Skeleton1,40,10,15

@@ -1,0 +1,2 @@
+Player Hero 100 50
+Enemy Goblin 40 Beast
